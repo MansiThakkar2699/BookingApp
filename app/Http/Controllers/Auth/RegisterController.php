@@ -29,14 +29,9 @@ class RegisterController extends Controller
             'password'=> Hash::make($request->password),
         ]);
 
-        // Send verification link
-        Mail::to($user->email)->send(new VerifyEmail($user->id));
-
-        return back()->with('success', 'Registration successful. Check your email for verification.');
-
         // login the user via default guard
-        //Auth::guard()->login($user);
+        Auth::guard()->login($user);
 
-        //return redirect()->route('dashboard');
+        return redirect()->route('booking');
     }
 }

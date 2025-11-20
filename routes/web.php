@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\BookingController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,9 +29,7 @@ Route::post('/login', [LoginController::class, 'login'])->name('login');
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/verify-email/{id}', [AuthController::class, 'verifyEmail'])->name('verify.email');
-
-Route::middleware('auth', 'verified')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('/booking', [BookingController::class, 'index']);
     Route::post('/booking', [BookingController::class, 'store']);
 });
